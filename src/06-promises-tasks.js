@@ -100,7 +100,8 @@ function getFastestPromise(array) {
  *    p.then((res) => {
  *      console.log(res) // => 6
  *    });
- *
+ *    почему так нельзя?
+ *    return Promise.all(array).then((resolve) => resolve.reduce(action));ю
  */
 function chainPromises(array, action) {
   const result = [];
