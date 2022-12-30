@@ -186,20 +186,26 @@ function isInsideCircle(circle, point) {
 //       // if (arr.length > 1) return null;
 //       return result;
 //     });
+// const result = Object.entries(
+//   str
+//     .split(' ')
+//     .map((item) => item.split(''))
+//     .flat()
+//     .reduce((obj, letter) => {
+//       obj[letter] += (obj[letter] || 0) + 1;
+//       return obj;
+//     }, {}),
+// ).reduce((results, letter) => (results[1] > letter[1] ? letter : results));
+// return result[1] === 1 ? result[0] : null;
 
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
-  // const result = Object.entries(
-  //   str
-  //     .split(' ')
-  //     .map((item) => item.split(''))
-  //     .flat()
-  //     .reduce((obj, letter) => {
-  //       obj[letter] += (obj[letter] || 0) + 1;
-  //       return obj;
-  //     }, {}),
-  // ).reduce((results, letter) => (results[1] > letter[1] ? letter : results));
-  // return result[1] === 1 ? result[0] : null;
+function findFirstSingleChar(str) {
+  const arr = str.split(' ').join('');
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr.indexOf(arr[i]) === arr.lastIndexOf(str[i])) {
+      return arr[i];
+    }
+  }
+  return null;
 }
 
 
@@ -293,27 +299,27 @@ function reverseInteger(str) {
  */
 
 // console.log(isCreditCardNumber(4012888888881881));
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
-  // const isOdd = ccn.toString().length % 2 === 0;
-  // const result = ccn
-  //   .toString()
-  //   .split('')
-  //   .map((item) => Number(item))
-  //   .reduce((sum, item, index, arr) => {
-  //     let newItem = item;
-  //     if ((index) % 2 !== 0 && (index + 1) !== arr.length && !isOdd) {
-  //       newItem = item * 2 > 9 ? item * 2 - 9 : item * 2;
-  //     }
-  //     if ((index) % 2 === 0 && (index + 1) !== arr.length && isOdd) {
-  //       newItem = item * 2 > 9 ? item * 2 - 9 : item * 2;
-  //     }
-  //     sum += newItem;
-  //     // console.log({ newItem });
-  //     // console.log({ sum });
-  //     return sum;
-  //   }, 0);
-  // return (result % 10) === 0;
+function isCreditCardNumber(ccn) {
+  const isOdd = ccn.toString().length % 2 === 0;
+  let sum = 0;
+  ccn
+    .toString()
+    .split('')
+    .map((item) => Number(item))
+    .map((item, index, arr) => {
+      let newItem = item;
+      if ((index) % 2 !== 0 && (index + 1) !== arr.length && !isOdd) {
+        newItem = item * 2 > 9 ? item * 2 - 9 : item * 2;
+      }
+      if ((index) % 2 === 0 && (index + 1) !== arr.length && isOdd) {
+        newItem = item * 2 > 9 ? item * 2 - 9 : item * 2;
+      }
+      sum += newItem;
+      // console.log({ newItem });
+      // console.log({ sum });
+      return sum;
+    });
+  return (sum % 10) === 0;
 }
 
 /**
@@ -421,22 +427,21 @@ function toNaryString(num, n) {
 
 // console.log(getCommonDirectoryPath(
 // ['/web/assets/style.css','/web/scripts/app.js','home/setting.conf']));
-function getCommonDirectoryPath(/* pathes  */) {
-  throw new Error('Not implemented');
-  // const obj = {};
-  // let result = '';
-  // const arr1 = pathes.map((item) => {
-  //   item.split('/').reduce((accObj, path) => {
-  //     accObj[path] = (accObj[path] || 0) + 1;
-  //     return accObj;
-  //   }, obj);
-  //   return obj;
-  // });
-  // const arr2 = Object.entries(arr1[arr1.length - 1]);
-  // for (let i = 0; i < arr2.length; i += 1) {
-  //   if (arr2[i][1] > pathes.length - 1) result += `${arr2[i][0]}/`;
-  // }
-  // return result;
+function getCommonDirectoryPath(pathes) {
+  const obj = {};
+  let result = '';
+  pathes.map((item) => {
+    item.split('/').map((path) => {
+      obj[path] = (obj[path] || 0) + 1;
+      return path;
+    });
+    return item;
+  });
+  const arr2 = Object.entries(obj);
+  for (let i = 0; i < arr2.length; i += 1) {
+    if (arr2[i][1] > pathes.length - 1) result += `${arr2[i][0]}/`;
+  }
+  return result;
 }
 
 
