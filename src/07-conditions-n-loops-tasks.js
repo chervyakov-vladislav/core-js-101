@@ -512,8 +512,59 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  for (let i = 0; i < position.length; i += 1) {
+  // строки
+    if (position[0][i] === position[1][i]
+    && position[0][i] === position[2][i]
+    && position[0][i] === 'X') {
+      return 'X';
+    }
+    // столбцы
+    if (position[i][0] === position[i][1]
+    && position[i][0] === position[i][2]
+    && position[i][0] === 'X') {
+      return 'X';
+    }
+    // 1 диагональ
+    if (position[0][0] === position[1][1]
+    && position[0][0] === position[2][2]
+    && position[0][0] === 'X') {
+      return 'X';
+    }
+    // 2 диагональ
+    if (position[0][2] === position[1][1]
+    && position[0][2] === position[2][0]
+    && position[0][2] === 'X') {
+      return 'X';
+    }
+
+
+    if (position[0][i] === position[1][i]
+    && position[0][i] === position[2][i]
+    && position[0][i] === '0') {
+      return '0';
+    }
+    // столбцы
+    if (position[i][0] === position[i][1]
+    && position[i][0] === position[i][2]
+    && position[i][0] === '0') {
+      return '0';
+    }
+    // 1 диагональ
+    if (position[0][0] === position[1][1]
+    && position[0][0] === position[2][2]
+    && position[0][0] === '0') {
+      return '0';
+    }
+    // 2 диагональ
+    if (position[0][2] === position[1][1]
+    && position[0][2] === position[2][0]
+    && position[0][2] === '0') {
+      return '0';
+    }
+  }
+  return undefined;
 }
 
 
